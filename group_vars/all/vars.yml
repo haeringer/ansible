@@ -1,0 +1,7 @@
+---
+cli:
+  host: "{{ inventory_hostname }}"
+  username: "{{ credentials['username'] }}"
+  password: "{{ credentials['password'] }}"
+  transport: cli
+  timeout: 120

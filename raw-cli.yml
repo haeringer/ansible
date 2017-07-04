@@ -1,0 +1,12 @@
+---
+- hosts: all
+  gather_facts: no
+  connection: local
+  # by using serial processing, make sure lineinfile output is not garbled
+  # serial: 1
+
+  tasks:
+
+  - name: send raw command
+    raw: "show version"
+      #provider: "{{ cli }}"

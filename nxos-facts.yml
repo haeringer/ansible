@@ -1,0 +1,22 @@
+---
+- hosts: all
+  gather_facts: no
+  connection: local
+  # by using serial processing, make sure lineinfile output is not garbled
+  # serial: 1
+
+  tasks:
+
+  - name: gather facts
+    nxos_facts:
+      provider: "{{ cli }}"
+#    register: nxos_facts
+
+#  - name: delete old file contents
+#    local_action: command cp /dev/null ~/ansible/output/ios_facts.json
+#
+#  - name: write to file
+#    lineinfile:
+#      dest: ~/ansible/output/ios_facts.json
+#      line: "{{ ios_facts | to_nice_json }}}"
+#    delegate_to: localhost

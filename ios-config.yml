@@ -1,0 +1,28 @@
+---
+- hosts: all
+  gather_facts: no
+  connection: local
+
+  tasks:
+
+  - name: do a config backup first
+    ios_config:
+      backup: yes
+      provider: "{{ cli }}"
+
+  - name: write configuration and save it
+    ios_config:
+      # pass the config file via --extra-vars cli argument
+      src: "{{ src }}"
+# alternatively use below options instead of config from src file
+#     lines:
+#       - 10 permit ip host 1.1.1.1 any log
+#       - 20 permit ip host 2.2.2.2 any log
+#     parents: ip access-list extended test
+#     before: no ip access-list extended test
+#     match: exact (default value is match: line)
+      save: yes
+      provider: "{{ cli }}"
+    register: cmd_output
+
+#   - debug: var=cmd_output

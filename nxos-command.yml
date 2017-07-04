@@ -1,0 +1,21 @@
+---
+- hosts: all
+  connection: local
+  gather_facts: no
+
+  tasks:
+
+#  - name: Ensure a VLAN is not present on the switch
+#    nxos_vlan:
+#      vlan_range: 1507
+#      state: absent
+#      transport: nxapi
+
+  - name: run arbitrary command on device
+    nxos_command:
+      commands:
+        - command: show feature | i nxapi
+      provider: "{{ cli }}"
+    register: cmd_output
+
+  - debug: var=cmd_output

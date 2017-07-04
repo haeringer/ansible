@@ -1,0 +1,27 @@
+---
+- hosts: all
+  connection: local
+  gather_facts: no
+
+  tasks:
+
+  - name: do a config backup first
+    nxos_config:
+      backup: yes
+      provider: "{{ cli }}"
+
+  - name: write configuration and save it
+    nxos_config:
+      # pass the config file via --extra-vars cli argument
+      src: "{{ src }}"
+# alternatively use below options instead of config from src file
+#     lines:
+#     - name SE-FireWall
+#     - mode fabricpath
+#     parents: vlan 3093
+#     before: no vlan 3093
+      save: yes
+      provider: "{{ cli }}"
+    register: cmd_output
+
+  - debug: var=cmd_output

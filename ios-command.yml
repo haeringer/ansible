@@ -1,0 +1,19 @@
+---
+- hosts: all
+  gather_facts: no
+  connection: local
+
+  tasks:
+
+  - name: execute configuration commands
+    ios_command:
+      commands:
+        - command: show run
+      provider: "{{ cli }}"
+    register: show_run
+
+  - name: copy output to file
+    copy:
+      content: "{{ show_run.stdout[0] }}"
+      dest: "backup/{{ inventory_hostname }}.txt"
+

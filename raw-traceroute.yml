@@ -1,0 +1,14 @@
+---
+- name: traceroute
+  hosts: all
+  gather_facts: false
+
+  tasks:
+  - name: traceroute
+    raw: traceroute 10.15.153.1
+    register: trace_result
+
+  # comment to disable shell output
+  - name: Debug registered variables
+    debug: var=trace_result
+
