@@ -21,7 +21,7 @@ Run playbook with a specific inventory file "nxos"
 
 Run playbook that includes e.g. `hosts: all` only on a specific host or group
 
-    ansible-playbook -i inventory/nxos --limit "access-dc" ios-facts.yml
+    ansible-playbook -i inventory/nxos --limit "access-dc" nxos-facts.yml
     
 Run playbook with credentials stored in vault file, asking for password to decrypt the vault file
 
@@ -29,7 +29,7 @@ Run playbook with credentials stored in vault file, asking for password to decry
     
 Run config playbook with config file passed via cli command, instead of file defined within playbook
 
-    ansible-playbook -i inventory/ios --ask-vault-pass ios-config.yml --extra-vars "source=./configs/ios-general.cfg"
+    ansible-playbook -i inventory/ios --ask-vault-pass ios-config.yml --extra-vars "src=./configs/ios-general.cfg"
 
 
 ## Ad-hoc commands (`-a`) and some simple modules
