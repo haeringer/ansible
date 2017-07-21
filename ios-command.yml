@@ -5,15 +5,15 @@
 
   tasks:
 
-  - name: execute configuration commands
+  - name: execute cli command
     ios_command:
       commands:
-        - command: show run
+        - command: "{{ cmd }}"
       provider: "{{ cli }}"
-    register: show_run
+    register: cmd_output
 
-  - name: copy output to file
+  - name: save output to file
     copy:
-      content: "{{ show_run.stdout[0] }}"
-      dest: "backup/{{ inventory_hostname }}.txt"
+      content: "{{ cmd_output.stdout[0] }}"
+      dest: "output/{{ inventory_hostname }}.txt"
 
