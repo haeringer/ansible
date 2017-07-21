@@ -27,9 +27,10 @@ Run playbook with credentials stored in vault file, asking for password to decry
 
     ansible-playbook -i inventory/ios --limit "access-nu" --ask-vault-pass ios-facts.yml
     
-Run config playbook with config file passed via cli command, instead of file defined within playbook
+Run config playbook with variable passed via cli command, e.g. a file containing config lines
 
     ansible-playbook -i inventory/ios --ask-vault-pass ios-config.yml --extra-vars "src=./configs/ios-general.cfg"
+    ansible-playbook -i inventory/ios --ask-vault-pass ios-command.yml --extra-vars "cmd='show run'"
 
 
 ## Ad-hoc commands (`-a`) and some simple modules
