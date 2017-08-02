@@ -1,0 +1,22 @@
+---
+- hosts: all
+  gather_facts: no
+  connection: local
+
+  tasks:
+
+  - name: execute show version
+    ios_command:
+      commands:
+        - command: "show ver | i Version [0-9][0-9]"
+      provider: "{{ cli }}"
+    register: cmd_output
+
+  - name: delete old local file contents
+    local_action: command cp /dev/null output/ios_version.txt
+
+  - name: save output to file
+    lineinfile:
+      dest: "output/ios_version.txt"
+      line: "- {{ inventory_hostname }}:\n{{ cmd_output.stdout[0] }}\n"
+    delegate_to: localhost
