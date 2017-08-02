@@ -9,6 +9,8 @@
 
   - name: gather facts
     ios_facts:
+      gather_subset:
+        - default
       provider: "{{ cli }}"
     register: ios_facts
 
